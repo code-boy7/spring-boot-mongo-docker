@@ -1,8 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-  name: spring-controller
+   name: springappdeployment
 spec:
   replicas: 1
   selector:
@@ -26,8 +25,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  labels:
-    name: springboot
+  name: springapp
 spec:
   type: NodePort
   ports:
