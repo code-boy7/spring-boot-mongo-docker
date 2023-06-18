@@ -93,9 +93,10 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 
-			<pluginGroups>
-                          <pluginGroup>org.sonarsource.scanner.maven</pluginGroup>
-                        </pluginGroups>
+			<plugin>
+                          <groupId>org.sonarsource.scanner.maven</groupId>
+			  <artifactId>sonar-maven-plugin</artifactId>
+                        </plugin>
 		</plugins>
 	</build>
 </project>
