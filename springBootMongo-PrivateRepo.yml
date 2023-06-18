@@ -19,7 +19,20 @@ spec:
         name: springboot
         ports:
         - name: springboot
-          containerPort: 8080     
+          containerPort: 8080  
+        env:
+        - name: MONGO_DB_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              name: springappconfigmap
+              key: username
+        - name: MONGO_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: springappsecrets
+              key: password
+        - name: MONGO_DB_HOSTNAME
+          value: mongo      
 ---
 # Node Port Service
 apiVersion: v1
