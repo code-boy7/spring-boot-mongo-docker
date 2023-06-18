@@ -20,19 +20,13 @@ spec:
         ports:
         - name: springboot
           containerPort: 8080  
-        env:
+       env:
         - name: MONGO_DB_USERNAME
-          valueFrom:
-            configMapKeyRef:
-              name: springappconfigmap
-              key: username
+          value: devdb
         - name: MONGO_DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: springappsecrets
-              key: password
+          value: devdb@123
         - name: MONGO_DB_HOSTNAME
-          value: mongo      
+          value: mongo     
 ---
 # Node Port Service
 apiVersion: v1
@@ -72,17 +66,11 @@ spec:
          image: mongo
          ports:
          - containerPort: 27017
-         env:
+        env:
          - name: MONGO_INITDB_ROOT_USERNAME
-           valueFrom:
-             configMapKeyRef:
-               name: springappconfigmap
-               key: username
+           value: devdb
          - name: MONGO_INITDB_ROOT_PASSWORD
-           valueFrom:
-             secretKeyRef:
-               name: springappsecrets
-               key: password
+           value: devdb@123
          volumeMounts:
          - name: mongodb-pvc
            mountPath: /data/db
@@ -101,24 +89,24 @@ spec:
     targetPort: 27017
 
 ---
-
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: springappconfigmap
-data:
-  username: springapp
-  password: mongodb@123
+#kind: ConfigMap
+#piVersion: v1
+#metadata:
+ # name: springappconfigmap
+#data:
+ # username: springapp
+ # password: mongodb@123
+ *** 
 
 ---
 
-apiVersion: v1
-kind: Secret
-metadata:
-  name: springappsecrets
-type: Opaque
-stringData:   # We can define multiple key value pairs.
-  password: devdb@123
+#apiVersion: v1
+#kind: Secret
+#metadata:
+ # name: springappsecrets
+#type: Opaque
+#stringData:   # We can define multiple key value pairs.
+ # password: devdb@123
 
 ---
 apiVersion: v1
