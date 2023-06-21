@@ -87,7 +87,12 @@
 		</dependency>
 	</dependencies>
         <distributionManagement>
-          
+          <repository>
+            <id>nexus</id>
+	    <name> spring-boot-release</name>  
+            <url>http://ec2-3-110-56-12.ap-south-1.compute.amazonaws.com:8081/repository/spring-boot-release/</url>
+          </repository>
+		
 	   <snapshotRepository>
              <id>nexus</id>
              <name>spring-boot</name>
