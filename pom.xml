@@ -92,7 +92,7 @@
             <name>spring-boot</name>
             <url>http://ec2-3-110-56-12.ap-south-1.compute.amazonaws.com:8081/repository/spring-boot/</url>
           </snapshotrepository>
-        <distributionManagement>
+        </distributionManagement>
 
 	<build>
 		<plugins>
