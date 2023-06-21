@@ -87,12 +87,14 @@
 		</dependency>
 	</dependencies>
         <distributionManagement>
-          <snapshotRepository>
-            <id>nexus</id>
-            <name>spring-boot</name>
-            <url>http://ec2-3-110-56-12.ap-south-1.compute.amazonaws.com:8081/repository/spring-boot/</url>
-          </snapshotRepository>
-        </distributionManagement>
+          
+	   <snapshotRepository>
+             <id>nexus</id>
+             <name>spring-boot</name>
+             <url>http://ec2-3-110-56-12.ap-south-1.compute.amazonaws.com:8081/repository/spring-boot/</url>
+           </snapshotRepository>
+        
+	</distributionManagement>
 
 	<build>
 		<plugins>
