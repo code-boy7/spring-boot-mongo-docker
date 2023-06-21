@@ -19,7 +19,7 @@
 		<spring-boot.version>2.1.5.RELEASE</spring-boot.version>
 		<spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
 		<logstash-logback-encoder.version>6.1</logstash-logback-encoder.version>
-		 <sonar.host.url>http://65.2.161.249:9000/</sonar.host.url>
+		 <sonar.host.url>http://13.126.207.99:9000/</sonar.host.url>
                  <sonar.login>squ_6647ea082d464960af707b488c4b881c63e66c5e</sonar.login>
 	</properties>
 
@@ -90,13 +90,13 @@
           <repository>
             <id>nexus</id>
 	    <name> spring-boot-release</name>  
-            <url>http://ec2-3-110-56-12.ap-south-1.compute.amazonaws.com:8081/repository/spring-boot-release/</url>
+            <url>http://13.127.63.18:8081/repository/spring-boot-release/</url>
           </repository>
 		
 	   <snapshotRepository>
              <id>nexus</id>
              <name>spring-boot</name>
-             <url>http://ec2-3-110-56-12.ap-south-1.compute.amazonaws.com:8081/repository/spring-boot/</url>
+             <url>http://13.127.63.18:8081/repository/spring-boot/</url>
            </snapshotRepository>
         
 	</distributionManagement>
