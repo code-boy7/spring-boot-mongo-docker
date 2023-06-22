@@ -20,7 +20,7 @@
 		<spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
 		<logstash-logback-encoder.version>6.1</logstash-logback-encoder.version>
 		 <sonar.host.url>http://13.127.37.28:9000/</sonar.host.url>
-                 <sonar.login>squ_fd63f079b00d6d6d7db6766b3342ea6bd7fd093egit</sonar.login>
+                 <sonar.login>squ_ca8a7296886ae6309dab1a908c896e1645efa238</sonar.login>
 	</properties>
 
 	<dependencyManagement>
