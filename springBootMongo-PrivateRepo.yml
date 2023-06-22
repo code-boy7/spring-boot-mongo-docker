@@ -1,49 +1,55 @@
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-   name: springappdeployments
+  name: springappdeployment
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
-       name: springboot
+      app: springapp
   template:
     metadata:
+      name: springapppod
       labels:
-        name: springboot
+        app: springapp
     spec:
-      imagePullSecrets:
-      - name: dockerreposecret
       containers:
-      - image: suiii07/spring-boot-app
-        imagePullPolicy: Always
-        name: springboot
+      - name: springappcontainer
+        image: dockerhandson/spring-boot-mongo
         ports:
-        - name: springboot
-          containerPort: 8080  
+        - containerPort: 8080
         env:
-         - name: MONGO_DB_USERNAME
-           value: devdb
-         - name: MONGO_DB_PASSWORD
-           value: devdb@123
-         - name: MONGO_DB_HOSTNAME
-           value: mongo     
+        - name: MONGO_DB_USERNAME
+          value: devdb
+        - name: MONGO_DB_PASSWORD
+          value: devdb@123
+        - name: MONGO_DB_HOSTNAME
+          value: mongo
 ---
-# Node Port Service
 apiVersion: v1
 kind: Service
 metadata:
   name: springapp
 spec:
-  type: NodePort
-  ports:
-    - port: 80
-      targetPort: 8080
   selector:
-    name: springboot
-
+    app: springapp
+  ports:
+  - port: 80
+    targetPort: 8080
+  type: NodePort
 ---
-
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongodbpvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
@@ -59,24 +65,23 @@ spec:
          app: mongodb
      spec:
        volumes:
-       - name: mongodb-pvc
+       - name: pvc
          persistentVolumeClaim:
-           claimName: pvc-hostpath
+           claimName: mongodbpvc
        containers:
        - name: mongodbcontainer
          image: mongo
          ports:
          - containerPort: 27017
          env:
-          - name: MONGO_INITDB_ROOT_USERNAME
-            value: devdb
-          - name: MONGO_INITDB_ROOT_PASSWORD
-            value: devdb@123
+         - name: MONGO_INITDB_ROOT_USERNAME
+           value: devdb
+         - name: MONGO_INITDB_ROOT_PASSWORD
+           value: devdb@123
          volumeMounts:
-         - name: mongodb-pvc
+         - name: pvc
            mountPath: /data/db
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
@@ -88,30 +93,4 @@ spec:
   ports:
   - port: 27017
     targetPort: 27017
-
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: pv-hostpath
-spec:
-  storageClassName: manual
-  capacity:
-    storage: 1Gi
-  accessModes:
-  - ReadWriteOnce
-  hostPath:
-    path: "/tmp/mongodata"
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: pvc-hostpath
-spec:
-  storageClassName: manual
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 100Mi
   
