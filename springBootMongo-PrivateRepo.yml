@@ -26,8 +26,6 @@ spec:
              value: devdb@123
            - name: MONGO_DB_HOSTNAME
              value: mongo
-      imagePullSecrets:
-       - name: dockerprivaterepo
 ---
 apiVersion: v1
 kind: Service
