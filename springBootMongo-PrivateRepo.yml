@@ -15,20 +15,20 @@ spec:
         app: springapp
     spec:
       containers:
+       - name: springappcontainer
+         image: 172.31.19.52:8086/spring-boot:latest
+         imagePullPolicy: Always
       imagePullSecrets:
-      - name: dockerprivaterepo
-      - image: 172.31.19.52:8086/spring-boot:latest
-        imagePullPolicy: Always
-        name: springappcontainer
-        ports:
-        - containerPort: 8080
-        env:
-        - name: MONGO_DB_USERNAME
-          value: devdb
-        - name: MONGO_DB_PASSWORD
-          value: devdb@123
-        - name: MONGO_DB_HOSTNAME
-          value: mongo
+       - name: dockerprivaterepo 
+         ports:
+         - containerPort: 8080
+         env:
+         - name: MONGO_DB_USERNAME
+           value: devdb
+         - name: MONGO_DB_PASSWORD
+           value: devdb@123
+         - name: MONGO_DB_HOSTNAME
+           value: mongo
 ---
 apiVersion: v1
 kind: Service
