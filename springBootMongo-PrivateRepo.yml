@@ -15,8 +15,11 @@ spec:
         app: springapp
     spec:
       containers:
-      - name: springappcontainer
-        image: dockerhandson/spring-boot-mongo
+      imagePullSecrets:
+      - name: dockerprivaterepo
+      - image: 172.31.19.52:8086/spring-boot:latest
+        imagePullPolicy: Always
+        name: springappcontainer
         ports:
         - containerPort: 8080
         env:
